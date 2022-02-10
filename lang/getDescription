@@ -1,0 +1,35 @@
+{
+  'name' 'getDescription'
+  'desc' 
+  <'
+    This macro returns the description of a tag in the language of the user.
+    If there is no match, the description 1 will be returned
+  '>
+  'sig' [ [ [ 'varableTagName:STRING'] [ 'description:STRING' ] ] ] // Signature
+  'params' {
+    // Signature params description
+    'varableTagName' 'parameter varableTagName TOP of the stack'
+    'description' 'the description in the correct language or the description 1 on the stack'
+  }
+  'examples' [
+    <'
+    'api.niveauCuve' @lang/getDescription 'description' STORE
+    'The description is:' $description
+    '>
+  ]
+} 'info' STORE
+<%
+  'textVar' STORE
+  SAVE 'context' STORE
+  {
+    'token' $readToken
+    'class' $textVar
+    'labels' {}
+    'end' MAXLONG
+    'start' MINLONG
+  } FETCH 'lGts' STORE
+
+  $lGts 0 GET ATTRIBUTES $language GET
+
+  $context RESTORE
+%>
